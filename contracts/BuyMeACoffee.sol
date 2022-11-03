@@ -3,7 +3,7 @@ pragma solidity ^0.8.4;
 
 contract BuyMeACoffee {
     //define state variable
-    address payable owner;
+    address payable public owner;
 
     // define data structure
     struct Memo {
@@ -17,35 +17,43 @@ contract BuyMeACoffee {
     Memo[] memos;
 
     // define events
-    event MemoHis(address indexed from,uint256 timestamp,string name,string message);
+    event MemoHis(
+        address indexed from,
+        uint256 timestamp,
+        string name,
+        string message
+    );
 
     //define constructor
-    constructor(){
-        owner=payable(msg.sender);
+    constructor() {
+        owner = payable(msg.sender);
     }
 
     //define modifiers
     modifier onlyOwner() {
-        require(msg.sender == owner ," you must be the owner");
+        require(msg.sender == owner, " you must be the owner");
         _;
     }
 
     //define Functions
-    function buyCoffee(string memory _name , string memory _message) public payable {
-        require(msg.value>0 ,"Please provide a valid value");
-        memos.push(Memo(msg.sender , block.timestamp , _name , _message));
-        emit MemoHis(msg.sender , block.timestamp , _name , _message);
+    function buyCoffee(string memory _name, string memory _message)
+        public
+        payable
+    {
+        require(msg.value > 0, "Please provide a valid value");
+        memos.push(Memo(msg.sender, block.timestamp, _name, _message));
+        emit MemoHis(msg.sender, block.timestamp, _name, _message);
     }
-    
-    function withdrawTip() public onlyOwner{
+
+    function withdrawTip() public onlyOwner {
         require(owner.send(address(this).balance));
     }
-    
-    function getMemos() public view returns(Memo[] memory) {
-        return memos;
+
+    function changeWithdrawlAdd(address newAdd) public payable onlyOwner {
+        owner = payable(newAdd);
     }
 
-
-
-    
+    function getMemos() public view returns (Memo[] memory) {
+        return memos;
+    }
 }
