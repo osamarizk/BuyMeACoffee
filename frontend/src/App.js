@@ -233,12 +233,13 @@ function App() {
 
   return (
     <div className="ui  container">
-      <h1 className="ui  header">Buy Me a Coffee..</h1>
+      <h1 className="ui  header">Alchemy..Road to Web3</h1>
+      <h2 className="ui  header">Buy Me a Coffee..by Osama Rizk</h2>
       <br></br>
 
       <br></br>
       {currentAcc ? (
-        <form className="ui large form" onSubmit={handleSubmit}>
+        <form className="ui meduim form" onSubmit={handleSubmit}>
           <div className="ui info message">
             <div className="header">Your connected Address is :</div>
             <p>{currentAcc}</p>
@@ -260,7 +261,7 @@ function App() {
               ></textarea>
             </div>
             <button
-              className="ui  fluid large linkedin button"
+              className="ui  fluid meduim linkedin button"
               onClick={buyCoffee}
             >
               Buy one Coffee for 0.001ETH
@@ -268,7 +269,7 @@ function App() {
 
             <p></p>
             <button
-              className="ui fluid large linkedin button"
+              className="ui fluid meduim linkedin button"
               onClick={buyLargeCoffee}
             >
               Buy Large Coffee for 0.003ETH
@@ -286,7 +287,7 @@ function App() {
               />
             </div>
             <button
-              className="ui  fluid large facebook button"
+              className="ui  fluid meduim facebook button"
               type="button"
               onClick={changeWithdAdd}
             >
@@ -304,7 +305,7 @@ function App() {
         </form>
       ) : (
         <button
-          className="ui  fluid huge facebook button"
+          className="ui  fluid meduim facebook button"
           onClick={connectWallet}
         >
           Connect Wallet{" "}
