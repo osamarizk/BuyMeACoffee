@@ -56,20 +56,20 @@ function App() {
     setMessage(data.get("message"));
     setWithAdd(data.get("withadd"));
 
-    console.log(name, message,withadd);
+    console.log(name, message, withadd);
   };
-  const onNameChange=async(e) =>{
+  const onNameChange = async (e) => {
     setName(e.target.value);
-  }
+  };
 
-  const onMessageChange=async(e) =>{
+  const onMessageChange = async (e) => {
     setMessage(e.target.value);
-  }
+  };
 
-  const withChangeEvent= async(e) =>{
+  const withChangeEvent = async (e) => {
     setWithAdd(e.target.value);
     console.log(withadd);
-  }
+  };
 
   const buyCoffee = async () => {
     try {
@@ -208,16 +208,17 @@ function App() {
         setWithAddAcc(await cofContract.owner());
         console.log(await cofContract.owner());
 
-        console.log(memos);
+        console.log(memos.length);
+        
         if (memos.length > 0) {
-          setProgress("Memos get successfuly ...");
+          setProgress("Memos get successfuly ..." + memos.length + " Memo");
           setbgColor("#ef6c00");
           setCompleted(100);
-        } else {
+        } else if (memos.length === 0) {
+          setProgress("No Memos found ...");
+          setbgColor("#ef6c00");
+          setCompleted(100);
         }
-        setProgress("No Memos found ...");
-        setbgColor("#ef6c00");
-        setCompleted(100);
       }
     } catch (error) {
       setProgress(error.message);
@@ -247,7 +248,7 @@ function App() {
           <div className="header">
             <div className="field">
               <label> Name</label>
-              <input placeholder=" Name" name="name" onChange={onNameChange}/>
+              <input placeholder=" Name" name="name" onChange={onNameChange} />
             </div>
             <div className="field">
               <label>Message</label>
@@ -273,8 +274,8 @@ function App() {
               Buy Large Coffee for 0.003ETH
             </button>
             <p></p>
-            </div>
-            <div className="header">
+          </div>
+          <div className="header">
             <div className="field">
               <label> Withdrawal Address</label>
               <input
